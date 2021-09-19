@@ -10,7 +10,7 @@ const infoModal = (item) => {
     style: {top: '25px'},
     content: (
       <Document file={require(`./281.pdf`).default}>
-        <Page pageNumber={2} scale={1} width={800}/>
+        <Page pageNumber={2} scale={1} width={600}/>
       </Document> 
     ),
     onOk() {},
