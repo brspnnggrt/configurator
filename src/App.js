@@ -576,16 +576,16 @@ class App extends React.Component {
     });
   };
 
-  changeHandler = (checked, item, innerItem) => {
+  changeHandler = (item, innerItem) => {
     // innerItem.Selected = checked;
-    this.state.data.Attributes.find(a => a == item).Values.find(v => v == innerItem).Selected = checked;
+    //this.state.data.Attributes.find(a => a == item).Values.find(v => v == innerItem).Selected = checked;
     this.setState({
       loading: false,
       data: this.state.data
     });
     window.parent.postMessage({
       runScript: true,
-      script: `cpq.models.configurator.attributes().find(a => a.id() == ${item.PA_ID}).values().find(v => v.pavId == ${innerItem.PAV_ID}).selected(${checked});`
+      script: `cpq.models.configurator.attributes().find(a => a.id() == ${item.PA_ID}).values().find(v => v.pavId == ${innerItem.PAV_ID}).selected();`
     }, "https://eusb.webcomcpq.com/");
     // this.requestData();
   }
@@ -621,7 +621,7 @@ class App extends React.Component {
                 label={item.Name}
                 name={item.Name.replace(/ /g, '')}
                 rules={[{ required: true, message: `Please input ${item.Name}!` }]}>
-                <Select disabled={!item.IsEnabled}>
+                <Select disabled={!item.IsEnabled} onChange={(value) => this.changeHandler(item, item.Values.find(v=>v.ValueCode || 'empty'==value))}>
                   {item.Values.map(value => 
                     <Select.Option value={value.ValueCode || 'empty'}>{value.ValueDisplay}</Select.Option>
                   )}
