@@ -1,6 +1,21 @@
 import React from 'react';
 import './App.css';
-import { Form, Select } from 'antd';
+import { Form, Select, Modal, Button } from 'antd';
+import { Document, Page, pdfjs } from 'react-pdf';
+
+const infoModal = (item) => {
+  Modal.info({
+    title: 'Datasheet',
+    width: '90%',
+    style: {top: '25px'},
+    content: (
+      <Document file={require(`./281.pdf`).default}>
+        <Page pageNumber={2} scale={1} width={800}/>
+      </Document> 
+    ),
+    onOk() {},
+  });
+}
 
 class App extends React.Component {
   
@@ -8,6 +23,8 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
     const id = 'antd-staubli-configurator';
     this.state = {
       loading: true,
@@ -126,6 +143,9 @@ class App extends React.Component {
                     <Select.Option value={value.ValueCode || 'empty'}>{value.ValueDisplay}</Select.Option>
                   )}
                 </Select>
+                { item.Name == 'Family' && 
+                  <Button type="secondary" disabled={!item.CanConfigure} onClick={() => infoModal()}>Datasheet</Button>
+                }
               </Form.Item>
               )}
             </Form>

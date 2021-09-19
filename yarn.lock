@@ -9535,7 +9535,7 @@ react-is@^17.0.1:
 
 react-pdf@^5.3.2:
   version "5.3.2"
-  resolved "https://registry.npmjs.org/react-pdf/-/react-pdf-5.3.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-pdf/-/react-pdf-5.3.2.tgz#517109d2a32ea7450dea49f7e5cc8e10bd2cfc4b"
   integrity sha512-gT2xeUAUJem5UWNZYIQSPJAlPDbc3mIIhEgGK8P/qo1B68WIE4R4v3tNFYM9e5nqlKnGZG4Cd68SetlmnPejwA==
   dependencies:
     "@babel/runtime" "^7.0.0"
