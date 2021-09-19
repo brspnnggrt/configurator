@@ -14,7 +14,7 @@ class App extends React.Component {
       id: id,
       taskIdRequestData: `${id}-requestData`,
       taskIdAttributeChangeEvent: `${id}-attributeChangeEvent`,
-      data: data_test
+      data: { Attributes: []}
     };
     window.addEventListener("message", this.onMessageReceived, false);
     this.requestData();
@@ -106,7 +106,7 @@ class App extends React.Component {
             <Form
             ref={this.formRef}
             name="basic"
-            labelCol={{ span: 4 }}
+            labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
             // initialValues={{ remember: true }}
             onFinish={null}
