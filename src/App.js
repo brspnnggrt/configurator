@@ -135,7 +135,7 @@ class App extends React.Component {
             }, {})}>
               {this.state.data.Attributes.map((item) =>
               <Form.Item
-                label={item.Name == 'Family' ? <Button type="secondary" onClick={() => infoModal()}>Family</Button> : item.Name}
+                label={item.Name == 'Family' ? 'Family' + <Button type="secondary" onClick={() => infoModal()}>Family</Button> : item.Name}
                 name={item.PA_ID}
                 rules={[{ required: item.Required, message: `Please input ${item.Name}!` }]}>
                 <Select disabled={!item.IsEnabled} onChange={(value) => this.changeHandler(item, item.Values.find(v=>(v.ValueCode || 'empty')==value))}>
