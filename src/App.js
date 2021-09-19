@@ -144,7 +144,7 @@ class App extends React.Component {
                   )}
                 </Select>
                 { item.Name == 'Family' && 
-                  <Button type="secondary" disabled={!item.CanConfigure} onClick={() => infoModal()}>Datasheet</Button>
+                  <Button style={{'marginTop': '10'}} type="secondary" onClick={() => infoModal()}>Datasheet for Family</Button>
                 }
               </Form.Item>
               )}
