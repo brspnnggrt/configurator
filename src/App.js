@@ -539,14 +539,29 @@ class App extends React.Component {
       loading: true,
       id: id,
       taskIdRequestData: `${id}-requestData`,
+      taskIdAttributeChangeEvent: `${id}-attributeChangeEvent`,
       data: data_test,
     };
     window.addEventListener("message", this.onMessageReceived, false);
     this.requestData();
+
+    window.parent.postMessage({
+      runScript: true,
+      script: `
+                cpq.models.configurator.attributes.subscribe(() => {
+                  let attributeChangeEvent = {
+                    taskId: '${this.state.taskIdAttributeChangeEvent}'
+                  };
+                  let iframe = document.getElementById('${this.state.id}');
+                  iframe.contentWindow.postMessage(attributeChangeEvent, "https://brspnnggrt.github.io/");
+                });
+              `
+    }, "https://eusb.webcomcpq.com/");
   }
 
   onMessageReceived = event => {
     if (event.data.taskId === this.state.taskIdRequestData) this.update(event);
+    if (event.data.taskId === this.state.taskIdAttributeChangeEvent) this.requestData();
   };
 
   requestData = () => {
