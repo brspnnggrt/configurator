@@ -634,7 +634,7 @@ class App extends React.Component {
             <Form
             ref={this.formRef}
             name="basic"
-            labelCol={{ span: 8 }}
+            labelCol={{ span: 4 }}
             wrapperCol={{ span: 16 }}
             // initialValues={{ remember: true }}
             onFinish={null}
