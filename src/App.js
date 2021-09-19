@@ -586,10 +586,12 @@ class App extends React.Component {
     // prepare data
     let model = event.data.response.find(r => r.api === '/api/rd/v1/Configurator' && r.function === 'getModel');
 
-    this.formRef.setFieldsValue(model.data.Attributes.reduce((acc, attr) => { 
-      acc[attr.Name.replace(/ /g, '')] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
-      return acc;
-    }));
+    if (this.formRef && this.formRef.current){
+      this.formRef.current.setFieldsValue(model.data.Attributes.reduce((acc, attr) => { 
+        acc[attr.Name.replace(/ /g, '')] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
+        return acc;
+      }));
+    }
 
     // update state if data available
     this.setState({
