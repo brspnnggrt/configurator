@@ -1,21 +1,21 @@
 import React from 'react';
 import './App.css';
 import { Form, Select, Modal, Button } from 'antd';
-// import { Document, Page, pdfjs } from 'react-pdf';
+import { Document, Page, pdfjs } from 'react-pdf';
 
-// const infoModal = (item) => {
-//   Modal.info({
-//     title: 'Datasheet',
-//     width: '90%',
-//     style: {top: '25px'},
-//     content: (
-//       <Document file={require(`./281.pdf`).default}>
-//         <Page pageNumber={2} scale={1} width={600}/>
-//       </Document> 
-//     ),
-//     onOk() {},
-//   });
-// }
+const infoModal = () => {
+  Modal.info({
+    title: 'Datasheet',
+    width: '90%',
+    style: {top: '25px'},
+    content: (
+      <Document file={require(`./281.pdf`).default}>
+        <Page pageNumber={2} scale={1} width={600}/>
+      </Document> 
+    ),
+    onOk() {},
+  });
+}
 
 class App extends React.Component {
   
@@ -143,7 +143,9 @@ class App extends React.Component {
                     <Select.Option value={value.ValueCode || 'empty'}>{value.ValueDisplay}</Select.Option>
                   )}
                 </Select>
-                
+                { item.Name == 'Family' && 
+                  <Button type="secondary" onClick={() => infoModal()}>Datasheet for Family</Button>
+                }
               </Form.Item>
               )}
             </Form>
@@ -157,6 +159,3 @@ class App extends React.Component {
 export default App;
 
 
-/* { item.Name == 'Family' && 
-                  <Button style={{'marginTop': '10'}} type="secondary" onClick={() => infoModal()}>Datasheet for Family</Button>
-                } */
