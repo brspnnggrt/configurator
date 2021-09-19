@@ -624,7 +624,7 @@ class App extends React.Component {
                 label={item.Name}
                 name={item.Name.replace(/ /g, '')}
                 rules={[{ required: true, message: `Please input ${item.Name}!` }]}>
-                <Select disabled={!item.IsEnabled} onChange={(value) => this.changeHandler(item, item.Values.find(v=>v.ValueCode || 'empty'==value))}>
+                <Select disabled={!item.IsEnabled} onChange={(value) => this.changeHandler(item, item.Values.find(v=>(v.ValueCode || 'empty')==value))}>
                   {item.Values.map(value => 
                     <Select.Option value={value.ValueCode || 'empty'}>{value.ValueDisplay}</Select.Option>
                   )}
