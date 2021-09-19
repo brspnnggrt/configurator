@@ -590,7 +590,7 @@ class App extends React.Component {
       this.formRef.current.setFieldsValue(model.data.Attributes.reduce((acc, attr) => { 
         acc[attr.PA_ID] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
         return acc;
-      }), {});
+      }, {}));
     }
 
     // update state if data available
