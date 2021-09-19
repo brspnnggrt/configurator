@@ -539,7 +539,7 @@ class App extends React.Component {
       loading: false,  // todo: default true
       id: id,
       taskIdRequestData: `${id}-requestData`,
-      data: data_test,
+      data: { Attributes: []},
     };
     window.addEventListener("message", this.onMessageReceived, false);
     this.requestData();
@@ -613,7 +613,7 @@ class App extends React.Component {
             onFinishFailed={null}
             autoComplete="off"
             initialValues={this.state.data.Attributes.reduce((acc, attr) => { 
-              acc[attr.Name.replace(/ /g, '')] = attr.Values[0].ValueCode || 'empty';
+              acc[attr.Name.replace(/ /g, '')] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
               return acc;
             }, {})}>
               {this.state.data.Attributes.map((item) =>
@@ -621,7 +621,7 @@ class App extends React.Component {
                 label={item.Name}
                 name={item.Name.replace(/ /g, '')}
                 rules={[{ required: true, message: `Please input ${item.Name}!` }]}>
-                <Select>
+                <Select disabled={!item.IsEnabled}>
                   {item.Values.map(value => 
                     <Select.Option value={value.ValueCode || 'empty'}>{value.ValueDisplay}</Select.Option>
                   )}
