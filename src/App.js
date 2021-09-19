@@ -531,6 +531,8 @@ const data_test = {
 }
 
 class App extends React.Component {
+  
+  formRef = React.createRef();
 
   constructor(props) {
     super(props);
@@ -540,7 +542,7 @@ class App extends React.Component {
       id: id,
       taskIdRequestData: `${id}-requestData`,
       taskIdAttributeChangeEvent: `${id}-attributeChangeEvent`,
-      data: data_test,
+      data: data_test
     };
     window.addEventListener("message", this.onMessageReceived, false);
     this.requestData();
@@ -584,6 +586,11 @@ class App extends React.Component {
     // prepare data
     let model = event.data.response.find(r => r.api === '/api/rd/v1/Configurator' && r.function === 'getModel');
 
+    this.formRef.setFieldsValue(model.data.Attributes.reduce((acc, attr) => { 
+      acc[attr.Name.replace(/ /g, '')] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
+      return acc;
+    }));
+
     // update state if data available
     this.setState({
       loading: false,
@@ -623,6 +630,7 @@ class App extends React.Component {
           }
           {!this.state.loading &&
             <Form
+            ref={this.formRef}
             name="basic"
             labelCol={{ span: 8 }}
             wrapperCol={{ span: 16 }}
