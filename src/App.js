@@ -23,7 +23,7 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
     const id = 'antd-staubli-configurator';
     this.state = {
