@@ -648,7 +648,7 @@ class App extends React.Component {
               <Form.Item
                 label={item.Name}
                 name={item.PA_ID}
-                rules={[{ required: true, message: `Please input ${item.Name}!` }]}>
+                rules={[{ required: item.Required, message: `Please input ${item.Name}!` }]}>
                 <Select disabled={!item.IsEnabled} onChange={(value) => this.changeHandler(item, item.Values.find(v=>(v.ValueCode || 'empty')==value))}>
                   {item.Values.map(value => 
                     <Select.Option value={value.ValueCode || 'empty'}>{value.ValueDisplay}</Select.Option>
