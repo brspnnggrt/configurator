@@ -536,10 +536,10 @@ class App extends React.Component {
     super(props);
     const id = 'antd-staubli-configurator';
     this.state = {
-      loading: false,  // todo: default true
+      loading: true,
       id: id,
       taskIdRequestData: `${id}-requestData`,
-      data: { Attributes: []},
+      data: data_test,
     };
     window.addEventListener("message", this.onMessageReceived, false);
     this.requestData();
