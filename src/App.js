@@ -585,7 +585,10 @@ class App extends React.Component {
     });
     window.parent.postMessage({
       runScript: true,
-      script: `cpq.models.configurator.attributes().find(a => a.id() == ${item.PA_ID}).values().find(v => v.pavId == ${innerItem.PAV_ID}).selected();`
+      script: `
+                selectedValue = cpq.models.configurator.attributes().find(a => a.id() == ${item.PA_ID}).values().find(v => v.pavId == ${innerItem.PAV_ID});
+                                cpq.models.configurator.attributes().find(a => a.id() == ${item.PA_ID}).selectedValue(selectedValue);
+              `
     }, "https://eusb.webcomcpq.com/");
     // this.requestData();
   }
