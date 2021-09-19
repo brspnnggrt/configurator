@@ -588,7 +588,7 @@ class App extends React.Component {
 
     if (this.formRef && this.formRef.current){
       this.formRef.current.setFieldsValue(model.data.Attributes.reduce((acc, attr) => { 
-        acc[attr.Name.replace(/ /g, '')] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
+        acc[attr.PA_ID] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
         return acc;
       }));
     }
@@ -641,13 +641,13 @@ class App extends React.Component {
             onFinishFailed={null}
             autoComplete="off"
             initialValues={this.state.data.Attributes.reduce((acc, attr) => { 
-              acc[attr.Name.replace(/ /g, '')] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
+              acc[attr.PA_ID] = attr.Values.find(v=>v.Selected)?.ValueCode || 'empty';
               return acc;
             }, {})}>
               {this.state.data.Attributes.map((item) =>
               <Form.Item
                 label={item.Name}
-                name={item.Name.replace(/ /g, '')}
+                name={item.PA_ID}
                 rules={[{ required: true, message: `Please input ${item.Name}!` }]}>
                 <Select disabled={!item.IsEnabled} onChange={(value) => this.changeHandler(item, item.Values.find(v=>(v.ValueCode || 'empty')==value))}>
                   {item.Values.map(value => 
